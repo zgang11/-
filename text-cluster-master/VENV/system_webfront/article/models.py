@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 # timezone 用于处理时间相关事务。
 from django.utils import timezone
 
+class Test(models.Model):
+    name = models.CharField(max_length=20)
+
 
 # 博客文章数据模型
 class ArticlePost(models.Model):
