@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'system_webfront.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'BIYE',
+        'NAME': 'sys',
         'USER': 'root',  # 登录帐号
         'PASSWORD': '123456',  # 登录密码
         'HOST': '127.0.0.1',  # 主机地址
