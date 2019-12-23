@@ -1,5 +1,4 @@
-import sys
-from .article.models import Article, Column
+from .models import Article, Column
 
 
 def main():
@@ -21,6 +20,7 @@ def main():
 
             article.column.add(c)
 
+
 if __name__ == '__main__':
-    #main()
+    main()
     print("Done!")
