@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <!-- 载入静态文件 -->
-{% load staticfiles %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontastic.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
 </head>
 <body>
 <!-- 引入导航栏 -->
 {% include 'header.html' %}
 <!-- 预留具体页面的位置 -->
-{% block content %}{% endblock content %}
+{% block content %}
+
+{% endblock content %}
 <!-- 引入注脚 -->
 {% include 'footer.html' %}
 <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
-<script src="{% static 'jquery/jquery-3.4.1.js' %}"></script>
+<script src="{% static 'jquery/jquery.js' %}"></script>
 <script src="{% static 'popper/popper.js' %}"></script>
 <!-- 引入bootstrap的js文件 -->
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'jquery-cookie/jquery.cookie.js' %}"></script>
+<script src="{% static 'chart/Chart.min.js' %}"></script>
+<script src="{% static 'jquery-validation/jquery.validate.min.js' %}"></script>
+<script src="{% static 'js/charts-home.js' %}"></script>
+<script src="{% static 'js/front.js' %}"></script>
 </body>
 </html>
