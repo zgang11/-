@@ -18,14 +18,18 @@
 {% block content %}
 
 <!-- 文章详情 -->
-<div class="container">
-    <div class="row">
-        <!-- 标题及作者 -->
-        <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
-        <div class="col-12 alert alert-success">作者：{{ article.author }}</div>
-        <!-- 文章正文 -->
-        <div class="col-12">
-            <p>{{ article.body }}</p>
+<div class="content-inner" style=";position:absolute;right:0;top:80px;">
+    <div class="container-fluid">
+        <div style="margin:0 50px;">
+            <div class="row">
+            <!-- 标题及作者 -->
+            <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
+            <div class="col-12 alert alert-success">作者：{{ article.author }}</div>
+            <!-- 文章正文 -->
+            <div class="col-12">
+                <p>{{ article.body }}</p>
+            </div>
+        </div>
         </div>
     </div>
 </div>

@@ -77,7 +77,7 @@
                             <td>{{article.title}}</td>
                             <td>{{article.author}}</td>
                             <td>{{article.created}}</td>
-                            <td><a href="#" class="btn btn-action btn-secondary">详情</a></td>
+                            <td><a href="{% url 'article:article_detail' article.id %}" class="btn btn-action btn-secondary">详情</a></td>
                         </tr>
                         {% endfor %}
                     </table>
