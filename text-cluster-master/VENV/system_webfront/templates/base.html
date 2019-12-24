@@ -16,10 +16,15 @@
     <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'dist/css/demo.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/modules/ionicons/css/ionicons.min.css' %}">
 </head>
 <body>
 <!-- 引入导航栏 -->
 {% include 'header.html' %}
+<!-- 引入左侧导航栏 -->
+{% include 'side-nave.html' %}
 <!-- 预留具体页面的位置 -->
 {% block content %}
 
@@ -36,5 +41,12 @@
 <script src="{% static 'jquery-validation/jquery.validate.min.js' %}"></script>
 <script src="{% static 'js/charts-home.js' %}"></script>
 <script src="{% static 'js/front.js' %}"></script>
+<script src="{% static 'dist/js/demo.js' %}"></script>
+<script src="{% static 'dist/js/custom.js' %}"></script>
+<script src="{% static 'dist/js/scripts.js' %}"></script>
+<script src="{% static 'dist/js/sa-functions.js' %}"></script>
+<script src="{% static 'dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js' %}"></script>
+<script src="{% static 'dist/modules/nicescroll/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static 'dist/modules/tooltip.js' %}"></script>
 </body>
 </html>

@@ -4,35 +4,89 @@
 
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
-    首页
+首页
 {% endblock title %}
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
 
-<!-- 定义放置文章标题的div容器 -->
-<div class="container">
-    <div class="row mt-2">
 
-        {% for article in articles %}
-        <!-- 文章内容 -->
-        <div class="col-4 mb-4">
-        <!-- 卡片容器 -->
-            <div class="card h-100">
-                <!-- 标题 -->
-                <h4 class="card-header">{{ article.title }}</h4>
-                <!-- 摘要 -->
-                <div class="card-body">
-                    <p class="card-text">{{ article.body|slice:'100' }}...</p>
+<div class="content-inner" style="top:50px;position:absolute;right:0;">
+
+    <!-- 首页开头    -->
+    <section class="dashboard-header">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Statistics -->
+                <div class="statistics col-lg-3 col-12">
+                    <div class="statistic d-flex align-items-center bg-white has-shadow">
+                        <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
+                        <div class="text"><strong>234</strong><br>
+                            <small>Applications</small>
+                        </div>
+                    </div>
+                    <div class="statistic d-flex align-items-center bg-white has-shadow">
+                        <div class="icon bg-green"><i class="fa fa-calendar-o"></i></div>
+                        <div class="text"><strong>152</strong><br>
+                            <small>Interviews</small>
+                        </div>
+                    </div>
+                    <div class="statistic d-flex align-items-center bg-white has-shadow">
+                        <div class="icon bg-orange"><i class="fa fa-paper-plane-o"></i></div>
+                        <div class="text"><strong>147</strong><br>
+                            <small>Forwards</small>
+                        </div>
+                    </div>
                 </div>
-                <!-- 注脚 -->
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">阅读本文</a>
+                <!-- Line Chart            -->
+                <div class="chart col-lg-6 col-12">
+                    <div class="line-chart bg-white d-flex align-items-center justify-content-center has-shadow">
+                        <canvas id="lineCahrt"></canvas>
+                    </div>
+                </div>
+                <div class="chart col-lg-3 col-12">
+                    <!-- Bar Chart   -->
+                    <div class="bar-chart has-shadow bg-white">
+                        <div class="title"><strong class="text-violet">95%</strong><br>
+                            <small>Current Server Uptime</small>
+                        </div>
+                        <canvas id="barChartHome"></canvas>
+                    </div>
+                    <!-- Numbers-->
+                    <div class="statistic d-flex align-items-center bg-white has-shadow">
+                        <div class="icon bg-green"><i class="fa fa-line-chart"></i></div>
+                        <div class="text"><strong>99.9%</strong><br>
+                            <small>Success Rate</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
+    </section>
+    <!-- 列表 -->
+    <div class="col-12 col-md-6 col-lg-6" style="max-width:100%;">
+        <div class="card">
+            <div class="card-header">
+                <h8>最新热点</h8>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        {% for article in articles %}
+                        <tr>
+                            <td>{{article.title}}</td>
+                            <td>{{article.author}}</td>
+                            <td>{{article.created}}</td>
+                            <td><a href="#" class="btn btn-action btn-secondary">详情</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
 
+        </div>
     </div>
 </div>
+
+
 {% endblock content %}
