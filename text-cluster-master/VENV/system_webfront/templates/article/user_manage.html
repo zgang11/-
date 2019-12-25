@@ -1,0 +1,23 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+热点话题
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<!-- 文章详情 -->
+<div class="content-inner" style=";position:absolute;right:0;top:80px;">
+    <div class="container-fluid">
+        <div style="margin:0 50px;">
+           <h1>用户管理</h1>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

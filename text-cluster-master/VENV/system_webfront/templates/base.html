@@ -19,21 +19,33 @@
 
     <link rel="stylesheet" href="{% static 'dist/css/demo.css' %}">
     <link rel="stylesheet" href="{% static 'dist/modules/ionicons/css/ionicons.min.css' %}">
+    <style>
+    #wrapper{
+       min-height: 100%;
+       margin-bottom: -60px;
+    }
+     #footer,
+        #push {
+            height: 60px;
+        }
+
+
+
+    </style>
 </head>
 <body>
 <!-- 引入导航栏 -->
 {% include 'header.html' %}
 <!-- 引入左侧导航栏 -->
 {% include 'side-nave.html' %}
-<!-- 预留具体页面的位置 -->
+<div id="wrapper">
+    {% block content %}{% endblock content %}
+    <div id="push"></div>
+</div>
 
-
-{% block content %}
-
-{% endblock content %}
 
 <!-- 引入注脚 -->
-{% include 'footer.html' %}
+
 <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
 <script src="{% static 'jquery/jquery.js' %}"></script>
 <script src="{% static 'popper/popper.js' %}"></script>

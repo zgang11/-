@@ -1,13 +1,12 @@
+{% load static %}
 <nav class="side-navbar">
 
     <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
     <ul class="list-unstyled">
-        <li class="active"><a href="index.html"> <i class="icon-home"></i>主页 </a></li>
-        <li><a href="tables.html"> <i class="icon-grid"></i>情感分析 </a></li>
-        <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>热点话题 </a></li>
-        <li><a href="forms.html"> <i class="icon-padnote"></i>用户管理 </a></li>
-        <li><a href="login.html"> <i class="icon-interface-windows"></i>关于 </a></li>
+        <li class="active"><a href="{% url 'article:article_list' %}"> <i class="icon-home"></i>主页 </a></li>
+        <li><a href="{% url 'article:analyse-list' %}"> <i class="icon-grid"></i>情感分析 </a></li>
+        <li><a href="{% url 'article:hot-topic' %}"> <i class="fa fa-bar-chart"></i>热点话题 </a></li>
+        <li><a href="{% url 'article:user-manage' %}"> <i class="icon-padnote"></i>用户管理 </a></li>
+        <li><a href="{% url 'article:about' %}"> <i class="icon-interface-windows"></i>关于 </a></li>
     </ul>
-
-
 </nav>

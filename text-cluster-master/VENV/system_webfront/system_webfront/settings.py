@@ -75,10 +75,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sys',
-        'USER': 'root',  # 登录帐号
+        'USER': 'dfzxk',  # 登录帐号
         'PASSWORD': '123456',  # 登录密码
         'HOST': '127.0.0.1',  # 主机地址
-        'PORT': '3300'  # 端口
+        'PORT': '8000'  # 端口
     }
 }
 
