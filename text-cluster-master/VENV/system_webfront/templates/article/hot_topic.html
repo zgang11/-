@@ -11,13 +11,65 @@
 {% block content %}
 
 <!-- 文章详情 -->
-<div class="content-inner" style=";position:absolute;right:0;top:80px;">
-    <div class="container-fluid">
-        <div style="margin:0 50px;">
-           <h1>热点话题</h1>
+<div class="content-inner" style="top:50px;position:absolute;right:0;">
+
+    <!-- 首页开头    -->
+    <section class="dashboard-header">
+        <div class="container-fluid">
+            <div class="row" style="margin:0 50px;">
+                <div style="width:100%;">
+
+                    <div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary">检索</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-outline-secondary" style="margin:0 5px;">分类一</button>
+                    <button class="btn btn-outline-secondary" style="margin:0 5px;">分类二</button>
+                    <button class="btn btn-outline-secondary" style="margin:0 5px;">分类三</button>
+                    <button class="btn btn-outline-secondary" style="margin:0 5px;">分类四</button>
+                    <button class="btn btn-outline-secondary" style="margin:0 5px;">分类五</button>
+                    <button class="btn btn-outline-secondary" style="margin:0 5px;">分类六</button>
+
+                </div>
+                <div class="card-body">
+                    <!-- 定义放置文章标题的div容器 -->
+                    <div class="container">
+                        <div class="row mt-2">
+
+                            {% for article in articles %}
+                            <!-- 文章内容 -->
+                            <div class="col-4 mb-4">
+                                <!-- 卡片容器 -->
+                                <div class="card h-100">
+                                    <!-- 标题 -->
+                                    <h4 class="card-header">{{ article.title }}</h4>
+                                    <!-- 摘要 -->
+                                    <div class="card-body">
+                                        <p class="card-text">{{ article.body|slice:'100' }}...</p>
+                                    </div>
+                                    <!-- 注脚 -->
+                                    <div class="card-footer">
+                                        <a href="#" class="btn btn-primary">阅读本文</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
+    </section>
+
 </div>
 
 {% endblock content %}

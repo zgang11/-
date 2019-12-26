@@ -48,13 +48,39 @@ def article_detail(request, id):
 
 # 情感分析
 def analyse_list(request):
-    context = {}
+    article_list = ArticlePost.objects.all()
+
+    # 每页显示2篇文章
+    paginator = Paginator(article_list, 5)
+
+    # 获取 url 中的页码
+    page = request.GET.get('page')
+
+    # 将导航对象相应的页码内容返回给 articles
+    articles = paginator.get_page(page)
+
+    # 需要传递给模板（templates）的对象
+    context = {'articles': articles}
     return render(request, 'article/scencetence_analyse.html', context)
 
 
 # 热点话题
 def hot_topic(request):
-    return render(request, 'article/hot_topic.html')
+    article_list = ArticlePost.objects.all()
+
+    # 每页显示2篇文章
+    paginator = Paginator(article_list, 5)
+
+    # 获取 url 中的页码
+    page = request.GET.get('page')
+
+    # 将导航对象相应的页码内容返回给 articles
+    articles = paginator.get_page(page)
+
+    # 需要传递给模板（templates）的对象
+    context = {'articles': articles}
+
+    return render(request, 'article/hot_topic.html', context)
 
 
 # 用户管理

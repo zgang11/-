@@ -18,14 +18,123 @@
 {% block content %}
 
 <!-- 文章详情 -->
-<div class="content-inner" style=";position:absolute;right:0;top:80px;">
-    <div class="container-fluid">
-        <div style="margin:0 50px;">
-           <h1>情感分析</h1>
+<div class="content-inner" style="top:50px;position:absolute;right:0;">
+
+    <!-- 首页开头    -->
+    <section class="dashboard-header">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- 表格 -->
+                <div class="col-lg-8">
+                    <div class="line-chart-example card">
+                        <div class="card-close">
+                            <div class="dropdown">
+                                <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow">
+                                    <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a
+                                        href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                            </div>
+                        </div>
+                        <div class="card-header d-flex align-items-center">
+                            <h3 class="h4">话题趋势</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="lineChartExample"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="line-chart-example card no-margin-bottom">
+                        <div class="card-close">
+                            <div class="dropdown">
+                                <button type="button" id="closeCard2" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
+                                </button>
+                                <div aria-labelledby="closeCard2" class="dropdown-menu dropdown-menu-right has-shadow">
+                                    <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a
+                                        href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                            </div>
+                        </div>
+                        <div class="card-header d-flex align-items-center">
+                            <h3 class="h4">情感分布</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="lineChartExample1"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 列表 -->
+                <div class="col-12 col-md-6" style="flex:0 0 100%;max-width:100%;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h8>最新热点</h8>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    {% for article in articles %}
+                                    <tr>
+                                        <td>{{article.title}}</td>
+                                        <td>{{article.author}}</td>
+                                        <td>{{article.created}}</td>
+                                        <td><a href="{% url 'article:article_detail' article.id %}"
+                                               class="btn btn-action btn-secondary">详情</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 页码导航 -->
+                <div class="pagination row" style="margin:0 auto;">
+                    <div class="m-auto">
+        <span class="step-links">
+            <!-- 如果不是第一页，则显示上翻按钮 -->
+            {% if articles.has_previous %}
+                <a href="?page=1" class="btn btn-success">
+                    &laquo; 1
+                </a>
+                <span>...</span>
+                <a href="?page={{ articles.previous_page_number }}"
+                   class="btn btn-secondary"
+                >
+                    {{ articles.previous_page_number }}
+                </a>
+            {% endif %}
+
+            <!-- 当前页面 -->
+            <span class="current btn btn-danger btn-lg">
+                {{ articles.number }}
+            </span>
+
+            <!-- 如果不是最末页，则显示下翻按钮 -->
+            {% if articles.has_next %}
+                <a href="?page={{ articles.next_page_number }}"
+                   class="btn btn-secondary"
+                >
+                    {{ articles.next_page_number }}
+                </a>
+                <span>...</span>
+                <a href="?page={{ articles.paginator.num_pages }}"
+                   class="btn btn-success"
+                >
+                    {{ articles.paginator.num_pages }} &raquo;
+                </a>
+            {% endif %}
+        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
+    </section>
+
 </div>
+
 
 {% endblock content %}
 </body>
