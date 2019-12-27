@@ -68,7 +68,7 @@ def analyse_list(request):
 def hot_topic(request):
     article_list = ArticlePost.objects.all()
 
-    # 每页显示2篇文章
+    # 每页显示5篇文章
     paginator = Paginator(article_list, 5)
 
     # 获取 url 中的页码
