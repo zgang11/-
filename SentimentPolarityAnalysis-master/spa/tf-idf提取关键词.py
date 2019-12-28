@@ -11,6 +11,12 @@ from multiprocessing import Process
 from spa.feature_extraction import ChiSquare
 from spa.tools import get_accuracy
 from spa.tools import Write2File
+import time as Time
+
+import requests
+from bs4 import BeautifulSoup
+import pymysql
+import MySQLdb
 
 labels = []
 corpus = []
@@ -96,8 +102,8 @@ def countIdf_index(corpus, index):
     word = vectorizer.get_feature_names()  # 获取词袋模型中的所有词
     arr = []
     for j in range(len(word)):
-        if weight[index][j] > 0.2:
-            print(word[j], weight[index][j])
+        if weight[index+1][j] > 0.2:
+            print(word[j], weight[index+1][j])
             arr.append(word[j])
     return arr
 
@@ -414,6 +420,7 @@ def test_dict(title):
     # a_sentence = "要是米饭再多点儿就更好了"    # result值: 修改前(0)/修改后(0)
     # a_sentence = "不太好吃，相当难吃，要是米饭再多点儿就好了"    # result值: 修改前(1)/修改后(0)
     result = ds.analyse_sentence(a_sentence)
+    return result
     print(result)
 
     # 对一个文件内语料进行情感分析
@@ -438,6 +445,9 @@ def test_dict(title):
 
 
 def totalData(corpus):
+    db = MySQLdb.connect(host="localhost", port=8000, user="dfzxk", passwd="123456", db="sys",
+                         charset="utf8")
+    cursor = db.cursor()
     with open('newsList.csv', encoding='UTF-8') as csvfile:
         rows = csv.reader(csvfile)
         i = 0
@@ -449,12 +459,25 @@ def totalData(corpus):
             commentCount = row[4]
             time = row[5]
             neg_pos = test_dict(title)
-            print(neg_pos)
             i = i + 1
+            print(i, neg_pos)
             arr = countIdf_index(corpus, i)
-            print(i, arr)
+            tags = arr
+            str_tag = ''
+            for item in tags:
+                str_tag = item + ',' + str_tag
+            print(str_tag)
+            author_id = 1
             # 关键词提取
-            # print(title, article, editor, newssource, commentCount, time)
+            sql = "INSERT INTO article_dailydata (title,editor,newssource,commentCount,time,neg_pos,tags,article) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+            val = (title, editor, newssource, commentCount, time, neg_pos, str_tag, article)
+            try:
+                cursor.execute(sql, val)
+                db.commit()
+                print('down')
+            except Exception as e:
+                print(e)
+                db.rollback()
 
 
 if __name__ == '__main__':
