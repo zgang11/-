@@ -35,8 +35,6 @@ class ArticlePost(models.Model):
 
 
 class DailyData(models.Model):
-    # 文章作者。参数 on_delete 用于指定数据删除的方式
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # 标题 参数 on_delete 用于指定数据删除的方式
     title = models.CharField(max_length=200)
@@ -67,6 +65,7 @@ class DailyData(models.Model):
         # ordering 指定模型返回的数据的排列顺序
         # '-created' 表明数据应该以倒序排列
         ordering = ('-time',)
+
 
     # 函数 __str__ 定义当调用对象的 str() 方法时的返回值内容
     def __str__(self):

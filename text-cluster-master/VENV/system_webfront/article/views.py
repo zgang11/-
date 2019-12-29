@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 # 导入 HttpResponse 模块
 from django.http import HttpResponse
-from .models import ArticlePost
+from .models import ArticlePost, DailyData
 
 
 # 视图函数
@@ -48,7 +48,7 @@ def article_detail(request, id):
 
 # 情感分析
 def analyse_list(request):
-    article_list = ArticlePost.objects.all()
+    article_list = DailyData.objects.all()
 
     # 每页显示2篇文章
     paginator = Paginator(article_list, 5)

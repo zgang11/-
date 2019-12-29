@@ -102,8 +102,8 @@ def countIdf_index(corpus, index):
     word = vectorizer.get_feature_names()  # 获取词袋模型中的所有词
     arr = []
     for j in range(len(word)):
-        if weight[index+1][j] > 0.2:
-            print(word[j], weight[index+1][j])
+        if weight[index - 1][j] > 0.2:
+            print(word[j], weight[index - 1][j])
             arr.append(word[j])
     return arr
 
@@ -465,7 +465,7 @@ def totalData(corpus):
             tags = arr
             str_tag = ''
             for item in tags:
-                str_tag = item + ',' + str_tag
+                str_tag = item + ' ' + str_tag
             print(str_tag)
             author_id = 1
             # 关键词提取
