@@ -464,10 +464,11 @@ def totalData(corpus):
             arr = countIdf_index(corpus, i)
             tags = arr
             str_tag = ''
-            for item in tags:
-                str_tag = item + ' ' + str_tag
+            if len(tags) != 0:
+                str_tag = str_tag + tags[0]
+            else:
+                str_tag = ''
             print(str_tag)
-            author_id = 1
             # 关键词提取
             sql = "INSERT INTO article_dailydata (title,editor,newssource,commentCount,time,neg_pos,tags,article) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
             val = (title, editor, newssource, commentCount, time, neg_pos, str_tag, article)

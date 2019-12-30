@@ -19,7 +19,7 @@ def article_list(request):
 
     ## render函数：载入模板，并返回context对象
 
-    article_list = ArticlePost.objects.all()
+    article_list = DailyData.objects.all()
 
     # 每页显示2篇文章
     paginator = Paginator(article_list, 5)
@@ -39,7 +39,7 @@ def article_list(request):
 # 文章详情
 def article_detail(request, id):
     # 取出相应的文章
-    article = ArticlePost.objects.get(id=id)
+    article = DailyData.objects.get(id=id)
     # 需要传递给模板的对象
     context = {'article': article}
     # 载入模板，并返回context对象
