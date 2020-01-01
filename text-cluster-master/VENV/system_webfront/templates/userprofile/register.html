@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<!-- 载入静态文件 -->
 {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}注册{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,32 +18,45 @@
 
     <link rel="stylesheet" href="{% static 'dist/css/demo.css' %}">
     <link rel="stylesheet" href="{% static 'dist/modules/ionicons/css/ionicons.min.css' %}">
-    <style>
-    #wrapper{
-       min-height: 100%;
-       margin-bottom: -60px;
-    }
-     #footer,
-        #push {
-            height: 60px;
-        }
-
-
-
-
-    </style>
 </head>
 <body>
-<!-- 引入导航栏 -->
-{% include 'header.html' %}
-<!-- 引入左侧导航栏 -->
-{% include 'side-nave.html' %}
-<div id="wrapper">
-    {% block content %}{% endblock content %}
-    <div id="push"></div>
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <br>
+            <form method="post" action=".">
+                {% csrf_token %}
+                <!-- 账号 -->
+                <div class="form-group col-md-4" style="margin:0 auto;">
+                    <label for="username">昵称</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <!-- 邮箱 -->
+                <div class="form-group col-md-4" style="margin:0 auto;">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email">
+                </div>
+                <!-- 密码 -->
+                <div class="form-group col-md-4" style="margin:0 auto;">
+                    <label for="password">设置密码</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <!-- 确认密码 -->
+                <div class="form-group col-md-4" style="margin:0 auto;">
+                    <label for="password2">确认密码</label>
+                    <input type="password" class="form-control" id="password2" name="password2" required>
+                </div>
+                <!-- 提交按钮 -->
+                  <div  style="display:flex;justify-content:center;margin:30px 0;">
+                     <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
-
-
+{% endblock content %}
 <!-- 引入注脚 -->
 
 <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
@@ -64,5 +76,23 @@
 <script src="{% static 'dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js' %}"></script>
 <script src="{% static 'dist/modules/nicescroll/jquery.nicescroll.min.js' %}"></script>
 <script src="{% static 'dist/modules/tooltip.js' %}"></script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

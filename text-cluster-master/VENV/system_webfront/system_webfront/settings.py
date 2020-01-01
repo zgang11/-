@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'article',
+    'userprofile',
     'taggit'
 ]
 
@@ -76,10 +77,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sys',
-        'USER': 'dfzxk',  # 登录帐号
+        # 'USER': 'dfzxk',  # 登录帐号
+        'USER': 'root',
         'PASSWORD': '123456',  # 登录密码
         'HOST': '127.0.0.1',  # 主机地址
-        'PORT': '8000'  # 端口
+        # 'PORT': '8000'  # 端口
+        'PORT': '3306'  # 端口
     }
 }
 

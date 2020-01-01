@@ -84,7 +84,7 @@ def countIdf(corpus):
     transformer = TfidfTransformer()  # 该类会统计每个词语的tf-idf权值
     tfidf = transformer.fit_transform(
         vectorizer.fit_transform(corpus))  # 第一个fit_transform是计算tf-idf，第二个fit_transform是将文本转为词频矩阵
-    weight = tfidf.toarray()  # 将tf-idf矩阵抽取出来，元素a[i][j]表示j词在i类文本中的tf-idf权重
+    weight = tfidf.toarray()
     word = vectorizer.get_feature_names()  # 获取词袋模型中的所有词
 
     for j in range(len(word)):
@@ -445,7 +445,7 @@ def test_dict(title):
 
 
 def totalData(corpus):
-    db = MySQLdb.connect(host="localhost", port=8000, user="dfzxk", passwd="123456", db="sys",
+    db = MySQLdb.connect(host="localhost", port=3306, user="root", passwd="123456", db="sys",
                          charset="utf8")
     cursor = db.cursor()
     with open('newsList.csv', encoding='UTF-8') as csvfile:

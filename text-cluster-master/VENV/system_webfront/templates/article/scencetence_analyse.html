@@ -7,7 +7,7 @@
 <body>
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
 
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
@@ -98,6 +98,10 @@
                                             {% endif %}
                                         </td>
                                         <td>
+                                            {% for item in article.tags|slice:'2' %}
+                                            <div  class="badge badge-warning"> {{item}}</div>
+                                            {% endfor %}
+                                            <div id="list">{{article.tags|cut:','}}</div>
                                             <div class="badge badge-warning" style="color:white;">{{article.tags}}</div>
                                         </td>
                                     </tr>

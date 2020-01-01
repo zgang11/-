@@ -7,7 +7,7 @@
 <body>
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
 
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
@@ -22,14 +22,17 @@
     <div class="container-fluid">
         <div style="margin:0 50px;">
             <div class="row">
-            <!-- 标题及作者 -->
-            <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
-            <div class="col-12 alert alert-success">作者：{{ article.editor }}</div>
-            <!-- 文章正文 -->
-            <div class="col-12">
-                <p>{{ article.article }}</p>
+                <!-- 标题及作者 -->
+                <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
+                <div class="col-12 alert alert-success">
+                    <div style="display:inline-block;">作者：{{ article.editor }}</div>
+                    <div style="display:inline-block;margin:0 16px;">浏览量：{{ article.total_views }}</div>
+                </div>
+                <!-- 文章正文 -->
+                <div class="col-12">
+                    <p>{{ article.article }}</p>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </div>
