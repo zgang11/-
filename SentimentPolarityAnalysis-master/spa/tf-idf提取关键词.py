@@ -445,7 +445,7 @@ def test_dict(title):
 
 
 def totalData(corpus):
-    db = MySQLdb.connect(host="localhost", port=3306, user="root", passwd="123456", db="sys",
+    db = MySQLdb.connect(host="localhost", port=8000, user="dfzxk", passwd="123456", db="sakila",
                          charset="utf8")
     cursor = db.cursor()
     with open('newsList.csv', encoding='UTF-8') as csvfile:
@@ -469,13 +469,14 @@ def totalData(corpus):
             else:
                 str_tag = ''
             print(str_tag)
+            total_page = 0
             # 关键词提取
-            sql = "INSERT INTO article_dailydata (title,editor,newssource,commentCount,time,neg_pos,tags,article) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
-            val = (title, editor, newssource, commentCount, time, neg_pos, str_tag, article)
+            sql = "INSERT INTO article_dailydata (title,editor,newssource,commentCount,time,neg_pos,tags,article,total_views) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            val = (title, editor, newssource, commentCount, time, neg_pos, str_tag, article, total_page)
             try:
                 cursor.execute(sql, val)
                 db.commit()
-                print('down')
+                print('done')
             except Exception as e:
                 print(e)
                 db.rollback()

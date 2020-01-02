@@ -106,7 +106,7 @@ class DailyData_Tags(models.Model):
     total_views = models.PositiveIntegerField(default=0)
 
     #tags 标签
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager()
 
     # 内部类 class Meta 用于给 model 定义元数据
     class Meta:

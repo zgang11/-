@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'article',
     'userprofile',
     'taggit'
+
 ]
 
 MIDDLEWARE = [
@@ -76,13 +77,13 @@ WSGI_APPLICATION = 'system_webfront.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sys',
-        # 'USER': 'dfzxk',  # 登录帐号
-        'USER': 'root',
+        'NAME': 'sakila',
+        'USER': 'dfzxk',  # 登录帐号
+        #'USER': 'root',
         'PASSWORD': '123456',  # 登录密码
         'HOST': '127.0.0.1',  # 主机地址
-        # 'PORT': '8000'  # 端口
-        'PORT': '3306'  # 端口
+        'PORT': '8000'  # 端口
+        #'PORT': '3306'  # 端口
     }
 }
 
