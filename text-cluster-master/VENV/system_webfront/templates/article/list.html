@@ -1,6 +1,7 @@
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% load static %}
+{% load my_filters_and_tags %}
 
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
@@ -28,7 +29,7 @@
                     <div class="statistic d-flex align-items-center bg-white has-shadow">
                         <div class="icon bg-green"><i class="fa fa-calendar-o"></i></div>
                         <div class="text"><strong>152</strong><br>
-                            <small>访客数  </small>
+                            <small>访客数 </small>
                         </div>
                     </div>
                     <div class="statistic d-flex align-items-center bg-white has-shadow">
@@ -65,71 +66,49 @@
     </section>
     <!-- 列表 -->
     <div class="col-12 col-md-6" style="flex:0 0 100%;max-width:100%;">
-        <div class="card">
+        <div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>作者</th>
-                            <th>时间</th>
-                            <th>标题</th>
-                            <th>来源</th>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <table class="table">
 
-                        </tr>
-                        {% for article in articles %}
-                        <tr>
-                            <td>{{article.editor}}</td>
-                            <td>{{article.time}}</td>
-                            <td>
-                                <a href="{% url 'article:article_detail' article.id %}">{{article.title}}</a>
-                            </td>
-                            <td>{{article.newssource}}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
+                            <tbody>
+                            {% for article in articles|frontArray %}
+                            <tr>
+                                <th scope="row">
+                                    <div style="color:red; display:inline-block">【{{article.title}}】</div>
+                                    <div style="display:inline-block">{{article.article|slice:'40'}}...</div>
+                                </th>
+                                <td>{{ article.time}}</td>
+                                <td><div class="btn btn-primary">关注</div></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-6">
+                        <table class="table">
+
+                            <tbody>
+                            {% for article in articles|halfArray %}
+                            <tr>
+                                <th scope="row">
+                                    <div style="color:red; display:inline-block;">【{{article.title}}】</div>
+                                    <div style="display:inline-block;">{{article.article|slice:'40'}}...</div>
+                                </th>
+                                <td>{{ article.time}}</td>
+                                <td><div class="btn btn-primary">关注</div></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- 页码导航 -->
-    <div class="pagination row" style="margin:0 auto;">
-        <div class="m-auto">
-        <span class="step-links">
-            <!-- 如果不是第一页，则显示上翻按钮 -->
-            {% if articles.has_previous %}
-                <a href="?page=1" class="btn btn-outline-dark">
-                    &laquo; 1
-                </a>
-                <span>...</span>
-                <a href="?page={{ articles.previous_page_number }}"
-                   class="btn btn-outline-dark"
-                >
-                    {{ articles.previous_page_number }}
-                </a>
-            {% endif %}
 
-            <!-- 当前页面 -->
-            <span class="current btn btn-outline-primary btn-lg">
-                {{ articles.number }}
-            </span>
 
-            <!-- 如果不是最末页，则显示下翻按钮 -->
-            {% if articles.has_next %}
-                <a href="?page={{ articles.next_page_number }}"
-                   class="btn btn-outline-dark"
-                >
-                    {{ articles.next_page_number }}
-                </a>
-                <span>...</span>
-                <a href="?page={{ articles.paginator.num_pages }}"
-                   class="btn btn-outline-dark"
-                >
-                    {{ articles.paginator.num_pages }} &raquo;
-                </a>
-            {% endif %}
-        </span>
-        </div>
-    </div>
 </div>
 
 

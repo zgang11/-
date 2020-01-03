@@ -445,7 +445,7 @@ def test_dict(title):
 
 
 def totalData(corpus):
-    db = MySQLdb.connect(host="localhost", port=8000, user="dfzxk", passwd="123456", db="sakila",
+    db = MySQLdb.connect(host="localhost", port=3306, user="root", passwd="password", db="sakila",
                          charset="utf8")
     cursor = db.cursor()
     with open('newsList.csv', encoding='UTF-8') as csvfile:
@@ -464,10 +464,11 @@ def totalData(corpus):
             arr = countIdf_index(corpus, i)
             tags = arr
             str_tag = ''
-            if len(tags) != 0:
-                str_tag = str_tag + tags[0]
-            else:
-                str_tag = ''
+            for j in range(len(tags)):
+                if j == 0:
+                    str_tag = str_tag + tags[0]
+                else:
+                    str_tag = str_tag + ',' + tags[j]
             print(str_tag)
             total_page = 0
             # 关键词提取

@@ -28,8 +28,7 @@
                         <button class="btn btn-outline-secondary" style="margin:0 5px;">分类六</button>
                     </div>
 
-                </div>
-                <div class="card-body">
+
 
                     <!-- 定义放置文章标题的div容器 -->
                     <div class="container">
@@ -61,7 +60,7 @@
                                     {% for article in articles %}
                                     <tr>
                                         <th scope="row">{{article.title}}</th>
-                                        <td>{{ article.body|slice:'120' }}...</td>
+                                        <td>{{ article.article|slice:'120' }}...</td>
                                         <td>{{ article.newssource}}</td>
                                         <td>{{article.time}}</td>
                                     </tr>
