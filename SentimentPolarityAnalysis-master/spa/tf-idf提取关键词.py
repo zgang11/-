@@ -36,7 +36,7 @@ def buildSW():
 
 
 def buildWB(texts):
-    with open('newsList.csv', newline='', encoding='UTF-8') as csvfile:
+    with open('newsList_1.6.1.csv', newline='', encoding='UTF-8') as csvfile:
         rows = csv.reader(csvfile)
         for row in rows:
             doc = row[1]
@@ -448,7 +448,7 @@ def totalData(corpus):
     db = MySQLdb.connect(host="localhost", port=3306, user="root", passwd="password", db="sakila",
                          charset="utf8")
     cursor = db.cursor()
-    with open('newsList.csv', encoding='UTF-8') as csvfile:
+    with open('newsList_1.6.1.csv', encoding='UTF-8') as csvfile:
         rows = csv.reader(csvfile)
         i = 0
         for row in rows:
@@ -458,6 +458,7 @@ def totalData(corpus):
             newssource = row[3]
             commentCount = row[4]
             time = row[5]
+            time_s = time[0:11]
             neg_pos = test_dict(title)
             i = i + 1
             print(i, neg_pos)
@@ -472,8 +473,8 @@ def totalData(corpus):
             print(str_tag)
             total_page = 0
             # 关键词提取
-            sql = "INSERT INTO article_dailydata (title,editor,newssource,commentCount,time,neg_pos,tags,article,total_views) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-            val = (title, editor, newssource, commentCount, time, neg_pos, str_tag, article, total_page)
+            sql = "INSERT INTO article_dailydata (title,editor,newssource,commentCount,time,neg_pos,tags,article,total_views,time_s) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            val = (title, editor, newssource, commentCount, time, neg_pos, str_tag, article, total_page, time_s)
             try:
                 cursor.execute(sql, val)
                 db.commit()

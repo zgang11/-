@@ -28,3 +28,10 @@ def frontArray(value):
     for j in range(0, index):
         next_array.append(value[j])
     return next_array
+
+
+
+@register.filter(name='toInt')
+def toInt(value):
+    num = str(value)
+    return num

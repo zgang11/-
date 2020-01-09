@@ -15,15 +15,15 @@
 <div class="content-inner" style="top:50px;position:absolute;right:0;">
 
     <!-- 首页开头    -->
-    <section class="dashboard-header">
+    <section class="dashboard-header" style="padding-bottom:0;">
         <div class="container-fluid">
             <div class="row">
                 <!-- Statistics -->
                 <div class="statistics col-lg-3 col-12">
                     <div class="statistic d-flex align-items-center bg-white has-shadow">
                         <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
-                        <div class="text"><strong>234</strong><br>
-                            <small>话题量</small>
+                        <div class="text"><strong>{{todayTopic}}</strong><br>
+                            <small>今日新增话题</small>
                         </div>
                     </div>
                     <div class="statistic d-flex align-items-center bg-white has-shadow">
@@ -34,30 +34,79 @@
                     </div>
                     <div class="statistic d-flex align-items-center bg-white has-shadow">
                         <div class="icon bg-orange"><i class="fa fa-paper-plane-o"></i></div>
-                        <div class="text"><strong>147</strong><br>
-                            <small>今日新增话题</small>
+                        <div class="text"><strong>{{Topic}}</strong><br>
+                            <small>话题量</small>
                         </div>
                     </div>
                 </div>
                 <!-- Line Chart            -->
                 <div class="chart col-lg-6 col-12">
-                    <div class="line-chart bg-white d-flex align-items-center justify-content-center has-shadow">
-                        <canvas id="lineCahrt"></canvas>
+                    <div class="bg-white d-flex align-items-center justify-content-center has-shadow" >
+                        <div id="myChart" style="height:300px;width:9000px;" style="margin:0 auto;"></div>
+                        <script>
+                            var myChart = echarts.init(document.getElementById('myChart'))
+                            option = {
+                                title: {
+                                    text: '话题新增图'
+                                },
+                                xAxis: {
+                                    type: 'category',
+                                    data: {{xAxis|safe}}
+                                },
+                                yAxis: {
+                                    type: 'value'
+                                },
+                                 series: [{
+                                    data: {{yAxis|safe}},
+                                    type: 'line'
+                                }]
+                            }
+                            myChart.setOption(option);
+                            console.log('11111111')
+                        </script>
                     </div>
                 </div>
                 <div class="chart col-lg-3 col-12">
                     <!-- Bar Chart   -->
-                    <div class="bar-chart has-shadow bg-white">
-                        <div class="title"><strong class="text-violet">95%</strong><br>
-                            <small>Current Server Uptime</small>
-                        </div>
-                        <canvas id="barChartHome"></canvas>
+                    <div class="bar-chart has-shadow bg-white" style="margin:0 auto;">
+                        <div id="myChart1" style="height:200px;width:300px;"></div>
+                        <script>
+                              var myChart = echarts.init(document.getElementById('myChart1'))
+                            option = {
+                               grid: {
+                                    left: '-10%',
+                                    right: '-1%',
+                                    bottom: '10%',
+                                    containLabel: true
+                                },
+                                xAxis: {
+                                    type: 'category',
+                                    data: {{xAxis|safe}}
+                                },
+                                yAxis: {
+
+                                    axisLine: {
+                                       show: false
+                                    },
+                                    axisTick: {
+                                       show: false
+                                    },
+                                },
+                                 series: [{
+                                    data: {{yAxis|safe}},
+                                    type: 'bar',
+                                    barWidth: '60%',
+                                    data: [100, 52, 200, 334, 390, 330, 220]
+                                }]
+                            }
+                            myChart.setOption(option);
+                        </script>
                     </div>
                     <!-- Numbers-->
                     <div class="statistic d-flex align-items-center bg-white has-shadow">
                         <div class="icon bg-green"><i class="fa fa-line-chart"></i></div>
                         <div class="text"><strong>99.9%</strong><br>
-                            <small>Success Rate</small>
+                            <small>指数</small>
                         </div>
                     </div>
                 </div>
@@ -68,19 +117,57 @@
     <div class="col-12 col-md-6" style="flex:0 0 100%;max-width:100%;">
         <div>
             <div class="card-body">
+                <div style="display:flex;margin:20px 0;flex-direction:row-reverse;justify-content:space-between;align-items:center;">
+                    <form>
+                        <div class="input-group">
+                            <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}"
+                               class="ion-ios-loop-strong" style="list-style-type:none;font-size:28px;" data-pack="ios"
+                               data-tags="reload, renew, reset"></a>
+                        </div>
+                    </form>
+                    <div><span style="font-size:20px;">最新热点</span><span style="color:red;">【Top10】</span></div>
+                </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <table class="table">
-
                             <tbody>
                             {% for article in articles|frontArray %}
                             <tr>
                                 <th scope="row">
                                     <div style="color:red; display:inline-block">【{{article.title}}】</div>
-                                    <div style="display:inline-block">{{article.article|slice:'40'}}...</div>
+                                    <a href="{% url 'article:article_detail' article.id %}">
+                                        <div style="display:inline-block">{{article.article|slice:'40'}}...</div>
+                                    </a>
+
                                 </th>
-                                <td>{{ article.time}}</td>
-                                <td><div class="btn btn-primary">关注</div></td>
+                                {% if article.total_views > 100 %}
+                                <td>
+                                    <li class="ion-arrow-up-c" style="list-style-type:none;color:red;font-size:24px;"
+                                        data-pack="default" data-tags=""></li>
+                                </td>
+                                {% elif article.total_views > 50 %}
+                                <td>
+                                    <li class="ion-arrow-up-c"
+                                        style="list-style-type:none;color:#FF4500;font-size:24px;"
+                                        data-pack="default" data-tags=""></li>
+                                </td>
+                                {% elif article.total_views > 10 %}
+                                <td>
+                                    <li class="ion-arrow-up-c"
+                                        style="list-style-type:none;color:#FF7F50;font-size:24px;"
+                                        data-pack="default" data-tags=""></li>
+                                </td>
+                                {% else %}
+                                <td>
+                                    <li class="ion-arrow-up-c" style="list-style-type:none;color:white;font-size:24px;"
+                                        data-pack="default" data-tags=""></li>
+
+                                </td>
+                                {% endif %}
+
+                                <td>
+                                    <div class="btn btn-primary">关注</div>
+                                </td>
                             </tr>
                             {% endfor %}
                             </tbody>
@@ -94,10 +181,37 @@
                             <tr>
                                 <th scope="row">
                                     <div style="color:red; display:inline-block;">【{{article.title}}】</div>
-                                    <div style="display:inline-block;">{{article.article|slice:'40'}}...</div>
+                                    <a href="{% url 'article:article_detail' article.id %}">
+                                        <div style="display:inline-block;">{{article.article|slice:'40'}}...</div>
+                                    </a>
+
                                 </th>
-                                <td>{{ article.time}}</td>
-                                <td><div class="btn btn-primary">关注</div></td>
+                                {% if article.total_views > 100 %}
+                                <td>
+                                    <li class="ion-arrow-up-c" style="list-style-type:none;color:red;font-size:24px;"
+                                        data-pack="default" data-tags=""></li>
+                                </td>
+                                {% elif article.total_views > 50 %}
+                                <td>
+                                    <li class="ion-arrow-up-c"
+                                        style="list-style-type:none;color:#FF4500;font-size:24px;"
+                                        data-pack="default" data-tags=""></li>
+                                </td>
+                                {% elif article.total_views > 10 %}
+                                <td>
+                                    <li class="ion-arrow-up-c"
+                                        style="list-style-type:none;color:#FF7F50;font-size:24px;"
+                                        data-pack="default" data-tags=""></li>
+                                </td>
+                                {% else %}
+                                <td>
+                                    <li class="ion-arrow-up-c" style="list-style-type:none;color:white;font-size:24px;"
+                                        data-pack="default" data-tags=""></li>
+                                </td>
+                                {% endif %}
+                                <td>
+                                    <div class="btn btn-primary">关注</div>
+                                </td>
                             </tr>
                             {% endfor %}
                             </tbody>

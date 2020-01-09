@@ -58,6 +58,9 @@ class DailyData(models.Model):
     # time 参数 on_delete 用于指定数据删除的方式
     time = models.CharField(max_length=100)
 
+    # time_s 参数 on_delete 用于指定数据删除的方式
+    time_s = models.CharField(max_length=100,default='')
+
     # neg_pos 参数 on_delete 用于指定数据删除的方式
     neg_pos = models.CharField(max_length=100)
 
@@ -120,3 +123,5 @@ class DailyData_Tags(models.Model):
     def __str__(self):
         # return self.title 将文章标题返回
         return self.title
+
+
